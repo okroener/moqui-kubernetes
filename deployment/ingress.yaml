@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: cloud-moqui.oliver-kroener.de
+  namespace: moqui
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      sub_filter 'http://' 'https://';
+      sub_filter_once off;
+    cert-manager.io/issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+      - cloud-moqui.oliver-kroener.de
+    secretName: acme-cloud-oliver-kroener-pzrdg 
+  rules:
+  - host: cloud-moqui.oliver-kroener.de
+    http:
+      paths:
+      - backend:
+          serviceName: moqui-demo-2-1-3
+          servicePort: 8080

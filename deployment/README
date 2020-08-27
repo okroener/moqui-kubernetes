@@ -1,0 +1,9 @@
+Install from local repository:
+
+docker save ...
+
+docker save mynginx > myimage.tar
+microk8s ctr image import myimage.tar
+
+https://microk8s.io/docs/registry-images
+
